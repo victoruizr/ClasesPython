@@ -60,7 +60,7 @@ class Vendedor(Empleado):
         self.areaVenta=areaVenta
         self.listaClientes=listaClientes
         self.porcentajes=porcentaje
-        self.salario+=self.salario+(self.salario*0.10)
+        self.salario=self.salario+(self.salario*0.10)
 
     def imprimirLista(self):
        for l in self.listaClientes:
@@ -105,11 +105,12 @@ class jefeZona(Empleado):
             print('%s - %s' % (l.nombre, l.apellidos))
 
     def imprimr(self):
-       print(" Secretario  Nombre --> " + self.secretario.nombre+" Despacho --> "+self.despacho+" Marca --> "+self.coche.marca+" Modelo --> "+self.coche.modelo+
-       "Matricula --> "+self.coche.matricula
-       )
-       print("Lista vendedores --> ")
-       self.imprimirLista()
+        super().imprimir()
+        print(" Secretario  Nombre --> " + self.secretario.nombre+" Despacho --> "+self.despacho+" Marca --> "+self.coche.marca+" Modelo --> "+self.coche.modelo+
+        "Matricula --> "+self.coche.matricula
+        )
+        print("Lista vendedores --> ")
+        self.imprimirLista()
 
     def cambioSecretario(self,secretario):
         self.secretario=secretario
