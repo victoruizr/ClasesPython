@@ -16,7 +16,7 @@ class Empleado():
               " Apellidos --> "+ self.apellidos+
               " DNI --> "+self.DNI+
               " Direccion --> "+self.direccion+
-              " Antiguedad --> "+self.antiguedad+
+              " Antiguedad --> "+str(self.antiguedad)+
               " Telefono --> "+self.telefono+
               " Salario --> "+str(self.salario)+"€"+
               " Supervisor Nombre --> "+self.supervisor.nombre+
@@ -26,8 +26,8 @@ class Empleado():
     def cambiarSupervisor(self,supervisor):
         self.supervisor=supervisor
 
-    def aumentarSalario(self,salario):
-        self.salario+=salario
+    def aumentarSalario(self,incremento):
+        self.salario = self.salario + ((self.salario * incremento / 100) * self.antiguedad)
 
 class Secretario(Empleado):
 
@@ -35,7 +35,8 @@ class Secretario(Empleado):
         super().__init__(nombre,apellidos,DNI,direccion,antiguedad,tlf,salario,supervisor,puesto)
         self.fax=fax
         self.despacho=despacho
-        self.salario=self.salario+(self.salario*0.05)
+
+
 
     def imprimr(self):
         super().imprimir()
@@ -129,20 +130,21 @@ class jefeZona(Empleado):
             i+=1
 
 print("-------------------Empleado-------------------")
-Emp1=Empleado("Pepe","Ruiz","77558375","Espapa","2 años","658958",66660,Empleado,"Administrador")
-Emp3=Empleado("Alex","Rodriguez","77558375","Espapa","2 años","658958",66660,Empleado,"Admintrador Sistemas")
-Emp2=Empleado("Jose","Ruiz","848484","España","3 años","95840",87,Emp1,"Adminitrasdor Informatico")
+Emp1=Empleado("Pepe","Ruiz","77558375","Espapa",2,"658958",66660,Empleado,"Administrador")
+Emp3=Empleado("Alex","Rodriguez","77558375","Espapa",2,"658958",66660,Empleado,"Admintrador Sistemas")
+Emp2=Empleado("Jose","Ruiz","848484","España",3,"95840",87,Emp1,"Adminitrasdor Informatico")
 Emp2.imprimir()
 Emp2.cambiarSupervisor(Emp3)
 Emp2.imprimir()
 Emp2.aumentarSalario(20)
 Emp2.imprimir()
 
-print("--------------------------Secretario---------------")
-Secretario1=Secretario("Joselito","Mendoza","8859858","Granada","2 años","62548",55,Emp1,"Jefe Sucursal","87878","Hola")
-Secretario1.imprimir()
 
-Secretario2=Secretario("Pepito","Mendoza","8859858","Granada","2 años","62548",55,Emp1,"Jefe Sucursal","87878","Hola")
+print("--------------------------Secretario---------------")
+Secretario1=Secretario("Joselito","Mendoza","8859858","Granada",2,"62548",55,Emp1,"Jefe Sucursal","87878","Hola")
+Secretario1.aumentarSalario(10)
+Secretario1.imprimir()
+Secretario2=Secretario("Pepito","Mendoza","8859858","Granada",2,"62548",55,Emp1,"Jefe Sucursal","87878","Hola")
 
 Cl1=Cliente("Pepillo","Rodriguez","8484")
 CL2=Cliente("Joselillo","Ruiz","475")
@@ -157,6 +159,7 @@ co2=Coche("Ferrari","FFX","8484Q")
 
 print("----------------------VENDEDOR-----------------------")
 Vendedor1=Vendedor("Victor","Ruiz","8859858","Granada","2 años","62548",1,Emp1,"Gerente Tienda",co1,"España",lista,"5%")
+Vendedor1.aumentarSalario(5)
 Vendedor1.imprimr()
 Vendedor1.altaCliente(CL3)
 Vendedor1.imprimr()
@@ -169,7 +172,8 @@ Vendedor2=Vendedor("ABCD","Ruiz","8859858","Granada","2 años","62548",1,Emp1,"G
 
 lista=[Vendedor1]
 print("-------------------------JEFEZONA-----------------------")
-jefeZona1=jefeZona("Angelito","Manuel","7755856","Direccion","5 años","54654",5,Emp3,"Alcalde",Secretario1,lista,co1,"asdawd")
+jefeZona1=jefeZona("Angelito","Manuel","7755856","Direccion",5,"54654",5,Emp3,"Alcalde",Secretario1,lista,co1,"asdawd")
+jefeZona1.aumentarSalario(20)
 jefeZona1.imprimr()
 jefeZona1.cambioSecretario(Secretario2)
 jefeZona1.imprimr()
